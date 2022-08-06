@@ -1,0 +1,291 @@
+\documentclass[]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+
+\section*{Interfaz GLU NURBS}
+
+Aunque los evaluadores son la única primitiva de OpenGL
+disponible para dibujar curvas y superficies directamente,
+y aunque se pueden implementar de manera muy eficiente en hardware,
+las aplicaciones a menudo acceden a ellos a través
+de bibliotecas de nivel superior.
+GLU proporciona una interfaz NURBS (Non-Uniform Rational B-Spline)
+construida sobre los comandos del evaluador OpenGL.
+
+\subsection*{Ejemplo simple de NURBS}
+
+Si entiende NURBS, escribir código OpenGL para
+manipular curvas y superficies NURBS es relativamente
+fácil, incluso con iluminación y mapeo de texturas.
+Siga estos pasos para dibujar curvas NURBS o
+superficies NURBS sin recortar.
+
+% TODO: La enumeracion
+
+Ejemplo 12-5 representa una superficie NURBS con la
+forma de una colina simétrica con puntos de control que
+van desde -3,0 a 3,0. La función base es una B-spline
+cúbica, pero la secuencia de nudos no es uniforme,
+con una multiplicidad de 4 en cada punto final, lo que
+hace que la función base se comporte como una curva de
+Bézier en cada dirección. La superficie está iluminada,
+con un reflejo difuso gris oscuro y reflejos especulares blancos.
+La figura 12-4 muestra la superficie como una estructura alámbrica iluminada.
+
+Figura 12-4: Superficie NURBS
+
+Ejemplo 12-5: Superficie NURBS: surface.c
+
+\lstinputlisting[language=C++]{codes/example12-5.cpp}
+
+\subsection*{Administrar un objeto NURBS}
+
+Como se mostró en el Ejemplo 12-5, \textbf{gluNewNurbsRenderer()} devuelve un nuevo objeto NURBS, cuyo tipo es un puntero a una estructura GLUnurbsObj. Debe crear este objeto antes de usar cualquier otra rutina NURBS. Cuando haya terminado con un objeto NURBS, puede usar \textbf{gluDeleteNurbsRenderer()} para liberar la memoria que se usó.
+
+\begin{description}
+    \item \emph{GLUnurbsObj* \textbf{gluNewNurbsRenderer}(void);}
+    \begin{description}
+        \item \textit{Crea un nuevo objeto NURBS, nobj. Devuelve un puntero al nuevo objeto, o cero, si OpenGL no puede asignar memoria para un nuevo objeto NURBS}
+    \end{description}
+    \item \emph{void \textbf{gluDeleteNurbsRenderer}(GLUnurbsObj *nobj);}
+    \begin{description}
+        \item \textit{Destruye el objeto NURBS nobj.}
+    \end{description}
+\end{description}
+
+\subsection*{Control de propiedades de renderización de NURBS}
+
+Un conjunto de propiedades asociadas con un objeto NURBS afecta la forma en que el objeto es renderizado. Estas propiedades incluyen cómo se rasteriza la superficie (por ejemplo, relleno o estructura alámbrica) y la precisión de la teselación.
+
+\begin{description}
+    \item \emph{void \textbf{gluNurbsProperty}(GLUnurbsObj *nobj, GLenum property,\\*GLfloat value);}
+    \begin{description}
+        \item \textit{
+            Controla los atributos de un objeto NURBS,
+            nobj. El argumento de propiedad especifica la propiedad
+            y puede ser GLU\_DISPLAY\_MODE, GLU\_CULLING, GLU\_SAMPLING\_METHOD,
+            GLU\_SAMPLING\_TOLERANCE, GLU\_PARAMETRIC\_TOLERANCE, GLU\_U\_STEP,
+            GLU\_V\_STEP o GLU\_AUTO\_LOAD\_MATRIX. El argumento de valor indica
+            cual deberia ser la propiedad.
+        }
+        \item \textit{
+            El valor predeterminado para GLU\_DISPLAY\_MODE
+            es GLU\_FILL, lo que hace que la superficie se represente
+            como polígonos. Si se utiliza GLU\_OUTLINE\_POLYGON para la
+            propiedad de modo de visualización, solo se representan los
+            contornos de los polígonos creados por teselación.
+            GLU\_OUTLINE\_PATCH representa los contornos de los parches
+            y las curvas de recorte.
+        }
+        \item \textit{
+            GLU\_CULLING puede acelerar el rendimiento al
+            no realizar la teselación si el objeto NURBS cae completamente
+            fuera del volumen de visualización; establezca esta propiedad
+            en GL\_TRUE para habilitar la selección (el valor
+            predeterminado es GL\_FALSE).
+        }
+        \item \textit{Dado que un objeto NURBS se representa como
+            primitivo, se muestrea en diferentes valores de sus
+            parámetros (u y v) y se divide en pequeños segmentos de
+            línea o polígonos para la representación. Si la propiedad
+            es GLU\_SAMPLING\_METHOD, el valor se establece en uno
+            de GLU\_PATH\_LENGTH (que es el valor
+            predeterminado), GLU\_PARAMETRIC\_ERROR o
+            GLU\_DOMAIN\_DISTANCE, que
+            especifica cómo se debe teselar una curva o superficie
+            NURBS. Cuando el valor se establece en GLU\_PATH\_LENGTH,
+            la superficie se representa de modo que la longitud máxima,
+            en píxeles, de los bordes de los polígonos teselados no
+            sea mayor que la especificada por GLU\_SAMPLING\_TOLERANCE.
+            Cuando se establece en GLU\_PARAMETRIC\_ERROR, el valor
+            especificado por GLU\_PARAMETRIC\_TOLERANCE es la distancia
+            máxima, en píxeles, entre los polígonos teselados y las
+            superficies a las que se aproximan. Cuando se establece
+            en GLU\_DOMAIN\_DISTANCE, la aplicación especifica, en
+            coordenadas paramétricas, cuántos puntos de muestra por
+            unidad de longitud se toman en las dimensiones u y v,
+            utilizando los valores para GLU\_U\_STEP y GLU\_V\_STEP.
+        }
+        \item \textit{Si la propiedad es GLU\_SAMPLING\_TOLERANCE y el método de muestreo es GLU\_PATH\_LENGTH, el valor controla la longitud máxima, en píxeles, que se usará para polígonos teselados. El valor predeterminado de 50,0 hace que el segmento de línea muestreado más grande o el borde del polígono tenga una longitud de 50,0 píxeles. Si la propiedad es GLU\_PARAMETRIC\_TOLERANCE y el método de muestreo es GLU\_PARAMETRIC\_ERROR, el valor controla la distancia máxima, en píxeles, entre los polígonos teselados y las superficies a las que se aproximan. El valor predeterminado para GLU\_PARAMETRIC\_TOLERANCE es 0,5, lo que hace que los polígonos teselados estén dentro de medio píxel de la superficie aproximada. Si el método de muestreo es GLU\_DOMAIN\_DISTANCE y la propiedad es GLU\_U\_STEP o GLU\_V\_STEP, el valor es el número de puntos de muestra por unidad de longitud tomados a lo largo de la dimensión u o v, respectivamente, en coordenadas paramétricas. El valor predeterminado para GLU\_U\_STEP y GLU\_V\_STEP es 100.
+        }
+        \item \textit{La propiedad GLU\_AUTO\_LOAD\_MATRIX determina si la matriz de proyección, la matriz de vista de modelo y la ventana gráfica se descargan del servidor OpenGL (GL\_TRUE, el valor predeterminado) o si la aplicación debe proporcionar estas matrices con gluLoadSamplingMatrices() (GL\_FALSE).
+        }
+    \end{description}
+    \item \emph{void \textbf{gluLoadSamplingMatrices}(GLUnurbsObj *nobj, const GLfloat modelMatrix[16], const GLfloat projMatrix[16], const GLint viewport[4]);}
+        \begin{description}
+            \item \textit{Si GLU\_AUTO\_LOAD\_MATRIX está desactivado, las matrices de proyección y vista de modelo y la ventana gráfica especificada en gluLoadSamplingMatrices() se utilizan para calcular las matrices de muestreo y selección para cada curva o superficie NURBS.}
+        \end{description}
+    \item Si necesita consultar el valor actual de una propiedad NURBS, puede usar gluGetNurbsProperty().
+    \item \emph{void \textbf{gluGetNurbsProperty}(GLUnurbsObj *nobj, GLenum property, GLfloat *value);}
+        \begin{description}
+            \item \textit{Dada la propiedad que se consultará para el objeto NURBS nobj, devolver su valor actual.}
+        \end{description}
+\end{description}
+
+\subsection*{Manejo de errores NURBS}
+
+Dado que hay 37 errores diferentes específicos de las funciones NURBS, es una buena idea registrar una devolución de llamada de error para informarle si se topó con uno de ellos. En el ejemplo 12-5, la función de devolución de llamada se registró con
+\newline
+\texttt{gluNurbsCallback(theNurb, GLU\_ERROR, (GLvoid (*)()) nurbsError);}
+\linebreak
+\emph{void \textbf{gluNurbsCallback}(GLUnurbsObj *nobj, GLenum which,
+void (*fn)(GLenum errorCode));}
+
+cuál es el tipo de devolución de llamada; debe ser GLU\_ERROR. Cuando una función NURBS detecta una condición de error, se invoca fn con el código de error como único argumento. errorCode es una de las 37 condiciones de error, denominadas GLU\_NURBS\_ERROR1 a GLU\_NURBS\_ERROR37. Use gluErrorString() para describir el significado de esos códigos de error.
+\linebreak
+En el Ejemplo 12-5, la rutina nurbsError() se registró como la función de devolución de llamada de error:
+
+\begin{lstlisting}[language=C++]
+void nurbsError(GLenum errorCode)
+{
+    const GLubyte *estring;
+    estring = gluErrorString(errorCode);
+    fprintf(stderr, "Nurbs Error: %s\n", estring);
+    exit(0);
+}
+\end{lstlisting}
+
+\section*{Crear una curva o superficie NURBS}
+
+Para renderizar una superficie NURBS, gluNurbsSurface() está entre paréntesis por gluBeginSurface() y gluEndSurface(). Las rutinas de horquillado guardan y restauran el estado del evaluador.
+
+\begin{description}
+    \item \emph{void \textbf{gluBeginSurface}(GLUnurbsObj *nobj);}
+    \item \emph{void \textbf{gluEndSurface}(GLUnurbsObj *nobj);}
+    \begin{description}
+        \item \textit{Después de gluBeginSurface(), una o más llamadas a gluNurbsSurface() definen los atributos de la superficie. Exactamente una de estas llamadas debe tener un tipo de superficie de GL\_MAP2\_VERTEX\_3 o GL\_MAP2\_VERTEX\_4 para generar vértices. Utilice gluEndSurface() para finalizar la definición de una superficie. El recorte de superficies NURBS también se admite entre gluBeginSurface() y gluEndSurface().
+        }
+    \end{description}
+    \item \emph{void \textbf{gluNurbsSurface}(GLUnurbsObj *nobj, GLint uknot\_count,\\
+    GLfloat *uknot, GLint vknot\_count, GLfloat *vknot,\\
+    GLint u\_stride, GLint v\_stride, GLfloat *ctlarray,\\
+    GLint uorder, GLint vorder, GLenum type);}
+    \begin{description}
+        \item \textit{Describe los vértices (o normales de superficie o coordenadas de textura) de una superficie NURBS, nobj. Se deben especificar varios de los valores para las direcciones paramétricas u y v, como las secuencias de nudos (uknot y vknot), los recuentos de nudos (uknot\_count y vknot\_count) y el orden del polinomio (uorder y vorder) para la superficie NURBS. Tenga en cuenta que no se especifica el número de puntos de control. En su lugar, se deriva determinando el número de puntos de control a lo largo de cada parámetro como el número de nudos menos el orden. Entonces, el número de puntos de control de la superficie es igual al número de puntos de control en cada dirección paramétrica, multiplicado entre sí. El argumento ctlarray apunta a una matriz de puntos de control.
+        }
+        \item \textit{El último parámetro, tipo, es uno de los tipos de evaluadores bidimensionales. Comúnmente, puede usar GL\_MAP2\_VERTEX\_3 para puntos de control no racionales o GL\_MAP2\_VERTEX\_4 para puntos de control racionales, respectivamente. También puede usar otros tipos, como GL\_MAP2\_TEXTURE\_COORD\_* o GL\_MAP2\_NORMAL para calcular y asignar coordenadas de textura o superficies normales. Por ejemplo, para crear una superficie NURBS iluminada (con superficies normales) y texturizada, es posible que deba llamar a esta secuencia:
+        }
+\begin{lstlisting}[language=C++]
+gluBeginSurface(nobj);
+    gluNurbsSurface(nobj, ..., GL_MAP2_TEXTURE_COORD_2);
+    gluNurbsSurface(nobj, ..., GL_MAP2_NORMAL);
+    gluNurbsSurface(nobj, ..., GL_MAP2_VERTEX_3);
+gluEndSurface(nobj);
+\end{lstlisting}
+        \item \textit{Los argumentos u\_stride y v\_stride representan el número de valores de punto flotante entre puntos de control en cada dirección paramétrica. El tipo de evaluador, así como su orden, afecta los valores u\_stride y v\_stride. En el Ejemplo 12-5, u\_stride es 12 (4 * 3) porque hay tres coordenadas para cada vértice (establecidas por GL\_MAP2\_VERTEX\_3) y cuatro puntos de control en la dirección paramétrica v; v\_stride es 3 porque cada vértice tenía tres coordenadas y los puntos de control v son adyacentes entre sí.
+        }
+    \end{description}
+    Dibujar una curva NURBS es similar a dibujar una superficie, excepto que todos los cálculos se realizan con un parámetro, u, en lugar de dos. Además, para las curvas, gluBeginCurve() y gluEndCurve() son las rutinas de horquillado.
+    \item \emph{void \textbf{gluBeginCurve}(GLUnurbsObj *nobj);}
+    \item \emph{void \textbf{gluEndCurve}(GLUnurbsObj *nobj);}
+    \begin{description}
+        \item \textit{Después de gluBeginCurve(), una o más llamadas a gluNurbsCurve() definen los atributos de la superficie. Exactamente una de estas llamadas debe tener un tipo de superficie de GL\_MAP1\_VERTEX\_3 o GL\_MAP1\_VERTEX\_4 para generar vértices. Utilice gluEndCurve() para finalizar la definición de una superficie.
+        }
+    \end{description}
+    \item \emph{void \textbf{gluNurbsCurve}(GLUnurbsObj *nobj, GLint uknot\_count,
+    GLfloat *uknot, GLint u\_stride, GLfloat *ctlarray,
+    GLint uorder, GLenum type);}
+    \begin{description}
+        \item \textit{Define una curva NURBS para el objeto nobj. Los argumentos tienen el mismo significado que los de gluNurbsSurface(). Tenga en cuenta que esta rutina requiere solo una secuencia de nudos y una declaración del orden del objeto NURBS. Si esta curva se define dentro de un par gluBeginCurve()/gluEndCurve(), entonces el tipo puede ser cualquiera de los tipos de evaluador unidimensional válidos (como GL\_MAP1\_VERTEX\_3 o GL\_MAP1\_VERTEX\_4).
+        }
+    \end{description}
+\end{description}
+
+\section*{Recortar una superficie NURBS}
+
+Para crear una superficie NURBS recortada con OpenGL, comience como si estuviera creando una superficie sin recortar. Después de llamar a gluBeginSurface() y gluNurbsSurface() pero antes de llamar a gluEndSurface(), inicie un recorte llamando a gluBeginTrim().
+
+\begin{description}
+    \item \emph{void \textbf{gluBeginTrim}(GLUnurbsObj *nobj);}
+    \item \emph{void \textbf{gluEndTrim}(GLUnurbsObj *nobj);}
+    \begin{description}
+        \item \textit{Marca el principio y el final de la definición de un bucle de recorte. Un bucle de recorte es un conjunto de segmentos de curva de recorte orientados (que forman una curva cerrada) que define los límites de una superficie NURBS.
+        }
+    \end{description}
+\end{description}
+
+Puede crear dos tipos de curvas de recorte, una curva lineal por partes con gluPwlCurve() o una curva NURBS con gluNurbsCurve(). Una curva lineal por partes no se parece a lo que convencionalmente se llama una curva, porque es una serie de líneas rectas. Una curva NURBS para recortar debe estar dentro del cuadrado unitario del espacio paramétrico (u, v). El tipo de una curva de recorte NURBS suele ser GLU\_MAP1\_TRIM2. Con menos frecuencia, el tipo es GLU\_MAP1\_TRIM3, donde la curva se describe en un espacio homogéneo bidimensional (u', v', w') por (u, v) = (u'/w', v'/w').
+
+\begin{description}
+    \item \emph{void \textbf{gluPwlCurve}(GLUnurbsObj *nobj, GLint count, GLfloat *array,
+    GLint stride, GLenum type);}
+    \begin{description}
+        \item \textit{Describe una curva de recorte lineal por partes para el objeto NURBS nobj. Hay puntos de conteo en la curva y están dados por matriz. El tipo puede ser GLU\_MAP1\_TRIM\_2 (el más común) o GLU\_MAP1\_TRIM\_3 ((u, v, w) espacio de parámetros homogéneo). El tipo afecta si la zancada, el número de valores de coma flotante hasta el siguiente vértice, es 2 o 3.
+        }
+    \end{description}
+\end{description}
+
+Debe tener en cuenta la orientación de las curvas de recorte, es decir, si están en el sentido de las agujas del reloj o en el sentido contrario a las agujas del reloj, para asegurarse de incluir la parte deseada de la superficie. Si imagina caminar por una curva, se incluye todo lo que se encuentra a la izquierda y se recorta todo lo que se encuentra a la derecha. Por ejemplo, si su moldura consta de un solo lazo en el sentido contrario a las agujas del reloj, se incluye todo lo que está dentro del lazo. Si la moldura consta de dos bucles en sentido contrario a las agujas del reloj que no se cruzan con interiores que no se cruzan, se incluye todo lo que está dentro de cualquiera de ellos. Si consiste en un bucle en el sentido contrario a las agujas del reloj con dos bucles en el sentido de las agujas del reloj en su interior, la región de recorte tiene dos agujeros. La curva de recorte más exterior debe ser en sentido contrario a las agujas del reloj. A menudo, ejecuta una curva de recorte alrededor de todo el cuadrado de la unidad para incluir todo lo que contiene, que es lo que obtiene de forma predeterminada al no especificar ninguna curva de recorte.
+
+Las curvas de recorte deben ser cerradas y sin intersección. Puede combinar curvas de recorte, siempre que los puntos finales de las curvas de recorte se unan para formar una curva cerrada. Puede anidar curvas, creando islas que flotan en el espacio. Asegúrese de obtener las orientaciones de la curva correctas. Por ejemplo, se produce un error si especifica una región de recorte con dos curvas en sentido contrario a las agujas del reloj, una dentro de otra: la región entre las curvas está a la izquierda de una y a la derecha de la otra, por lo que debe incluirse y excluirse. lo cual es imposible La figura 12-5 ilustra algunas posibilidades válidas.
+
+\begin{lstlisting}[language=C++]
+void display(void)
+{
+    GLfloat knots[8] = {0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0};
+    GLfloat edgePt[5][2] = /* counter clockwise */
+        {{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}, {0.0, 1.0}, {0.0, 0.0}};
+    GLfloat curvePt[4][2] = /* clockwise */
+        {{0.25, 0.5}, {0.25, 0.75}, {0.75, 0.75}, {0.75, 0.5}};
+    GLfloat curveKnots[8] =
+        {0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0};
+    GLfloat pwlPt[4][2] = /* clockwise */
+        {{0.75, 0.5}, {0.5, 0.25}, {0.25, 0.5}};
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glPushMatrix();
+    glRotatef(330.0, 1., 0., 0.);
+    glScalef(0.5, 0.5, 0.5);
+    gluBeginSurface(theNurb);
+    gluNurbsSurface(theNurb, 8, knots, 8, knots,
+                    4 * 3, 3, &ctlpoints[0][0][0],
+                    4, 4, GL_MAP2_VERTEX_3);
+    gluBeginTrim(theNurb);
+    gluPwlCurve(theNurb, 5, &edgePt[0][0], 2,
+                GLU_MAP1_TRIM_2);
+    gluEndTrim(theNurb);
+    gluBeginTrim(theNurb);
+    gluNurbsCurve(theNurb, 8, curveKnots, 2,
+                  &curvePt[0][0], 4, GLU_MAP1_TRIM_2);
+    gluPwlCurve(theNurb, 3, &pwlPt[0][0], 2,
+                GLU_MAP1_TRIM_2);
+    gluEndTrim(theNurb);
+    gluEndSurface(theNurb);
+    glPopMatrix();
+    glFlush();
+}
+\end{lstlisting}
+
+En el ejemplo 12-6, gluBeginTrim() y gluEndTrim() ponen entre paréntesis cada curva de recorte. El primer recorte, con vértices definidos por la matriz edgePt[][], va en sentido contrario a las agujas del reloj alrededor de toda la unidad cuadrada del espacio paramétrico. Esto asegura que todo se dibuje, siempre que no se elimine por una curva de recorte en el sentido de las agujas del reloj dentro de él. El segundo recorte es una combinación de una curva de recorte NURBS y una curva de recorte lineal por partes. La curva NURBS termina en los puntos (0.9, 0.5) y (0.1, 0.5), donde se encuentra con la curva lineal por tramos, formando una curva cerrada en el sentido de las agujas del reloj.
+
+\end{document}
