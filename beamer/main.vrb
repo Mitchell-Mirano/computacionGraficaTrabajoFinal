@@ -1,0 +1,19 @@
+\frametitle{Definición de valores de coordenadas uniformes en una dimensión}
+
+\begin{itemize}
+\justifying
+    \item Aplica la cuadrícula de mapa definida actualmente a todos los evaluadores habilitados. El modo puede ser \textbf{GL\_POINT o GL\_LINE}, dependiendo de si desea dibujar puntos o una línea conectada a lo largo de la curva.
+
+    \item  Tiene exactamente el mismo efecto que emitir una \textbf{glEvalCoord1()} para cada uno de los pasos, incluyendo $p1$ y $p2$, donde $0\le\ p1,\ p2\le\ n$. Es equivalente a lo siguiente:
+\end{itemize}
+
+\begin{alertblock}{}
+\small
+\begin{verbatim}
+  glBegin(GL_POINTS); /* o glBegin(GL_LINE_STRIP);*/
+      for (i = p1; i <= p2; i++)
+          glEvalCoord1(u1 + i*(u2-u1)/n);
+  glEnd();
+\end{verbatim}
+\end{alertblock}
+Excepto si \textbf{i = 0} o \textbf{i = n}, entonces se llama a \textbf{glEvalCoord1()} con exactamente $u1$ o $u2$ como parámetro.
