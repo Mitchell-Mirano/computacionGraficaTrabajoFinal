@@ -1,0 +1,20 @@
+\documentclass[a4paper,12pt,spanish]{article}
+
+% Cargue todos los paquetes y configuraciones en el preámbulo
+\input{settings/packages}
+
+\begin{document}
+	% Configuracion inicial del documento
+	\input{settings/Inicio}
+	% Portada
+	\input{sections/caratula}
+	\newpage
+    \tableofcontents
+	\newpage
+	% Secciones
+	\input{sections/main}
+	% Bibliografia
+	\newpage
+
+	%\printbibliography[heading=bibintoc]
+\end{document}
