@@ -1,18 +1,3 @@
-\section{Resumen}
-Los evaluadores hacen splines y superficies que se basan en una base de Bézier (o Bernstein). Si se desea utilizar el evaluador para trazar curvas y superficies utilizando otras bases, se debe saber cómo convertir su base en una base Bezier. Además, al renderizar una superficie Bézier o parte de ella utilizando el evaluador, es necesario especificar el nivel de detalle de su subdivisión. La funcionalidad NURBS de  GLU es una interfaz de alto nivel: los procesos NURBS encapsulan una gran cantidad de código complejo,los procesos NURBS utilizan polígonos planos para el renderizado.
-
-\section{Abstract}
-Evaluators make splines and surfaces that are based on a Bézier (or Bernstein) basis. If you want to use the evaluator to draw curves and surfaces using other bases, you must know how to convert your base to a Bézier base. Also, when rendering a Bezier surface or part of it using the evaluator, it is necessary to specify the level of detail of its subdivision. GLU's NURBS functionality is a high-level interface: NURBS processes encapsulate a lot of complex code, NURBS processes use flat polygons for rendering.
-
-\section{Introducción}
-En el nivel más bajo, el hardware de gráficos dibuja puntos, líneas y polígonos, que suelen ser triángulos y cuadriláteros.Las curvas y las superficies suaves se dibujan aproximandolas con líneas, polígonos grandes  o pequeños. Sin embargo, muchas curvas y superficies útiles se pueden describir matemáticamente mediante una pequeña cantidad de parámetros, como algunos puntos de control. Registrar los 16 puntos de control de una superficie requiere mucho menos espacio que registrar 1000 triángulos  con  información vectorial normal en cada vértice. Además, los 1000 triángulos solo se aproximan a la superficie real, pero los puntos de control representan con precisión la superficie real. \\
-
-Los evaluadores permiten especificar puntos en una curva o superficie (o parte de ella) simplemente usando puntos de control. La curva o la superficie se pueden mostrar con cualquier precisión. Además, los vectores normales se pueden calcular automáticamente para las superficies. Los puntos generados por el evaluador se pueden usar de muchas maneras: para dibujar puntos en ubicaciones de superficie, para dibujar una versión alámbrica de la superficie, para dibujar una superficie sombreada o textura.\\
-
-El evaluador se puede utilizar para describir todas las splines o superficies de polinomios o polinomios racionales en cualquier grado. Esto incluye casi todas las splines y superficies de splines en uso hoy en día, incluidas B-splines, NURBS (B-Splines racionales no uniformes), curvas y superficies de Bézier y splines de Hermite. Dado que los evaluadores solo brindan descripciones de bajo nivel de puntos en curvas o superficies, a menudo se usan en bibliotecas de utilidades que brindan una interfaz de nivel superior para el programador. La función NURBS de GLU es una interfaz de alto nivel: Los procesos NURBS encapsulan una gran cantidad de código complejo. Gran parte del renderizado final se realiza con el evaluador, pero para ciertas condiciones (por ejemplo, recorte de curvas), los procesos NURBS utilizan polígonos planos para el renderizado.\\
-
-Este capítulo contiene las siguientes secciones principales: Los evaluadores, en ella se explica cómo funcionan los evaluadores y cómo controlarlos utilizando los comandos de OpenGL y la interfaz NURBS de GLU, la cual describe las rutinas de GLU para crear superficies NURBS.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Evaluadores}
 Los evaluadores permiten especificar puntos en una curva o superficie simplemente usando puntos de control. La curva o la superficie se pueden mostrar con cualquier precisión.\\
 
@@ -41,7 +26,7 @@ El programa mostrado en el Ejemplo 1 dibuja una curva cúbica de Bézier usando 
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.5\linewidth]{figures/CURVA.PNG}
+	\includegraphics[width=0.5\linewidth]{../images/CURVA.PNG}
 	\caption{Curva de Bézier.}
 	\label{fig:propuesta}
 \end{figure}
@@ -136,7 +121,7 @@ El polinomio de Bernstein de grado n (u orden $n+1$ ) aproxima una función en u
 \begin{align*}
 B_i^n\left(u\right)=\left(\begin{matrix}n\\i\\\end{matrix}\right)u^i\left(1-u\right)^{n-i}
 \end{align*}
-Si $Pi$ representa un conjunto de puntos de control (unidimensionales, bidimensionales, tridimensionales o incluso cuatridimensionales), entonces la ecuación: 
+Si $Pi$ representa un conjunto de puntos de control (unidimensionales, bidimensionales, tridimensionales o incluso cuatridimensionales), entonces la ecuación:
 \begin{align*}
 C\left(u\right)=\sum_{i=0}^{n}{B_i^n\left(u\right)}P_i
 \end{align*}
@@ -164,30 +149,30 @@ El orden es el grado más uno, y debe coincidir con el número de puntos de cont
 
 \begin{table}[h]
 \begin{center}
-\caption{Tipos de puntos de control para \textbf{glMap1*()}.}\\
+\caption{Tipos de puntos de control para \textbf{glMap1*()}.}
 	\arrayrulecolor{grayblack}
 	%\rowcolors{1}{white}{gray}
 	{\color{grayblack}
 \begin{tabular}{ p{6.5cm} cc }
 \toprule
-\textbf{Parámetro } & \textbf{Significado} \\ 
+\textbf{Parámetro } & \textbf{Significado} \\
 \midrule
 GL\_MAP1\_VERTEX\_3 & coordenadas de los vértices x, y, z.\\
 
-GL\_MAP1\_VERTEX\_4 & coordenadas de los vértices x, y, z, w. \\ 
-GL\_MAP1\_INDEX & índice de color. \\ 
+GL\_MAP1\_VERTEX\_4 & coordenadas de los vértices x, y, z, w. \\
+GL\_MAP1\_INDEX & índice de color. \\
 
-GL\_MAP1\_COLOR\_4 & R, G, B, A. \\ 
+GL\_MAP1\_COLOR\_4 & R, G, B, A. \\
 
-GL\_MAP1\_NORMAL & coordenadas normales. \\ 
+GL\_MAP1\_NORMAL & coordenadas normales. \\
 
-GL\_MAP1\_TEXTURE\_COORD\_1 & s coordenadas de textura. \\ 
+GL\_MAP1\_TEXTURE\_COORD\_1 & s coordenadas de textura. \\
 
-GL\_MAP1\_TEXTURE\_COORD\_2 & s, t coordenadas de textura. \\ 
+GL\_MAP1\_TEXTURE\_COORD\_2 & s, t coordenadas de textura. \\
 
-GL\_MAP1\_TEXTURE\_COORD\_3  & s, t, r coordenadas de textura \\ 
+GL\_MAP1\_TEXTURE\_COORD\_3  & s, t, r coordenadas de textura \\
 
-GL\_MAP1\_TEXTURE\_COORD\_4  & s, t, r, q coordenadas de textura. \\ 
+GL\_MAP1\_TEXTURE\_COORD\_4  & s, t, r, q coordenadas de textura. \\
 \bottomrule
 \end{tabular}}
 \label{tab:coeficientes}
@@ -218,19 +203,10 @@ Define una cuadrícula que va de $u1$ a $u2$ en $n$ pasos, que están espaciados
 Aplicamos la cuadrícula de mapa definida actualmente a todos los evaluadores habilitados. El modo puede ser \textbf{GL\_POINT o GL\_LINE}, dependiendo de si desea dibujar puntos o una línea conectada a lo largo de la curva. La llamada tiene exactamente el mismo efecto que emitir una \textbf{glEvalCoord1()} para cada uno de los pasos, incluyendo $p1$ y $p2$, donde $0\le\ p1,\ p2\le\ n$. Es equivalente a lo siguiente: \\
 
 \begin{lstlisting}
-    glBegin(GL_POINTS); /* OR glBegin(GL_LINE_STRIP); */ 
-          for (i = p1; i <= p2; i++) 
-              glEvalCoord1(u1 + i*(u2-u1)/n); 
+    glBegin(GL_POINTS); /* OR glBegin(GL_LINE_STRIP); */
+          for (i = p1; i <= p2; i++)
+              glEvalCoord1(u1 + i*(u2-u1)/n);
     glEnd();
-\end{lstlisting} 
-\\
+\end{lstlisting}
+
 Excepto que si $i = 0$ o $i = n$, entonces se llama a \textbf{glEvalCoord1()} con exactamente $u1$ o $u2$ como parámetro.
-
-\newpage
-\begin{thebibliography}{10}
-
-
-
-
-
-

@@ -1,36 +1,3 @@
-\documentclass[]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{listings}
-\usepackage{xcolor}
-
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-
-\lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    keepspaces=true,
-    numbers=left,
-    numbersep=5pt,
-    showspaces=false,
-    showstringspaces=false,
-    showtabs=false,
-    tabsize=2
-}
-\lstset{style=mystyle}
-
-
-\begin{document}
-
 \section*{Interfaz GLU NURBS}
 
 Aunque los evaluadores son la única primitiva de OpenGL
@@ -285,5 +252,3 @@ void display(void)
 \end{lstlisting}
 
 En el ejemplo 12-6, gluBeginTrim() y gluEndTrim() ponen entre paréntesis cada curva de recorte. El primer recorte, con vértices definidos por la matriz edgePt[][], va en sentido contrario a las agujas del reloj alrededor de toda la unidad cuadrada del espacio paramétrico. Esto asegura que todo se dibuje, siempre que no se elimine por una curva de recorte en el sentido de las agujas del reloj dentro de él. El segundo recorte es una combinación de una curva de recorte NURBS y una curva de recorte lineal por partes. La curva NURBS termina en los puntos (0.9, 0.5) y (0.1, 0.5), donde se encuentra con la curva lineal por tramos, formando una curva cerrada en el sentido de las agujas del reloj.
-
-\end{document}
