@@ -819,6 +819,13 @@ INPUT sections\caratula.tex
 INPUT .\sections\caratula.tex
 INPUT .\sections\caratula.tex
 INPUT sections\caratula.tex
+INPUT .\.\figures\\cover.pdf
+INPUT .\.\figures\\cover.pdf
+INPUT .\figures\\cover.pdf
+INPUT .\.\figures\\cover.pdf
+OUTPUT Simple_report.pdf
+INPUT .\.\figures\\cover.pdf
+INPUT .\.\figures\\cover.pdf
 INPUT C:\Users\sony\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmss17.tfm
 INPUT C:\Users\sony\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmss17.tfm
 INPUT C:\Users\sony\AppData\Local\Programs\MiKTeX\tex\latex\lm\ot1lmr.fd
@@ -849,7 +856,6 @@ INPUT C:\Users\sony\AppData\Local\Programs\MiKTeX\tex\latex\lm\omxlmex.fd
 INPUT C:\Users\sony\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\lmex10.tfm
 INPUT C:\Users\sony\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmss17.tfm
 INPUT C:\Users\sony\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmssbx10.tfm
-OUTPUT Simple_report.pdf
 INPUT C:\Users\sony\AppData\Local\MiKTeX\pdftex\config\pdftex.map
 OUTPUT Simple_report.toc
 INPUT .\figures\escudo_san_marcos.png

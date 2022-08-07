@@ -1,5 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1659828203 "c:/Users/sony/Desktop/Trabajo de Computacion Grafica/computacionGraficaTrabajoFinal/DocumentoLatex_CG/Simple_report.tex" "Simple_report.pdf" "Simple_report" 1659828203
+["pdflatex"] 1659841709 "c:/Users/sony/Desktop/Trabajo de Computacion Grafica/computacionGraficaTrabajoFinal/DocumentoLatex_CG/Simple_report.tex" "Simple_report.pdf" "Simple_report" 1659841709
+  "./figures//cover.pdf" 1659859438 5543 22803dd83f021946efae4d5f47150902 ""
   "C:/Users/sony/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1627693761 9728249 e91d37a4582a9e46a14e20ef96cb6408 ""
   "C:/Users/sony/AppData/Local/MiKTeX/pdftex/config/pdftex.map" 1659751103 364174 3698791a5681a850a71adca365425c51 ""
   "C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc" 1254938640 2375 baa924870cfb487815765f9094cf3728 ""
@@ -172,14 +173,14 @@
   "C:/Users/sony/AppData/Local/Programs/MiKTeX/tex/latex/wrapfig/wrapfig.sty" 1044403200 26220 3701aebf80ccdef248c0c20dd062fea9 ""
   "C:/Users/sony/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1623005660 55589 34128738f682d033422ca125f82e5d62 ""
   "C:/Users/sony/AppData/Local/Programs/MiKTeX/tex/latex/xkeyval/xkeyval.sty" 1623005690 4902 efb3d66683a2da2a232f71e3a571a899 ""
-  "Simple_report.aux" 1659828203 34 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "Simple_report.aux" 1659841709 34 3985256e7290058c681f74d7a3565a19 "pdflatex"
   "Simple_report.tex" 1659823803 1265 e305eae92436b298b6c7d7aac7499eb1 ""
   "Simple_report.toc" 0 -1 0 "pdflatex"
   "c:/Users/sony/Desktop/Trabajo de Computacion Grafica/computacionGraficaTrabajoFinal/DocumentoLatex_CG/Simple_report.tex" 1659823803 1265 e305eae92436b298b6c7d7aac7499eb1 ""
-  "cover" 0 -1 0 ""
+  "figures//cover.pdf" 1659859438 5543 22803dd83f021946efae4d5f47150902 ""
   "figures/CURVA.PNG" 1659778900 4474 7d5f11571f2ee097a8a884d0a39c0c55 ""
   "figures/escudo_san_marcos.png" 1659778900 80529 1257a6ebe140a81ceb3db260e8e5430f ""
-  "sections/caratula.tex" 1659823427 891 621fae9169c9ddc8d04d3011a0674950 ""
+  "sections/caratula.tex" 1659841674 895 03fa5029c0a9dd7a6e216567b3e71403 ""
   "sections/main.tex" 1659820402 15663 4b3d465874d2e1901b5877353f0e4915 ""
   "settings/Inicio.tex" 1659778900 624 ccbcf6accd2c87e02f3059e0f269082c ""
   "settings/packages.tex" 1659823803 2544 d905c6610cab36c90bc247265c592f23 ""
