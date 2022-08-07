@@ -344,3 +344,4 @@ TSWLatexianTemp*
 #*Notes.bib
 
 *.pdf
+!images/*.pdf
