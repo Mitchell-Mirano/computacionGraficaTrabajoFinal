@@ -1,9 +1,0 @@
-\babel@toc {spanish}{}\relax 
-\contentsline {section}{\numberline {1}Resumen}{2}{}%
-\contentsline {section}{\numberline {2}Abstract}{2}{}%
-\contentsline {section}{\numberline {3}Introducción}{2}{}%
-\contentsline {section}{\numberline {4}Evaluadores}{3}{}%
-\contentsline {subsection}{\numberline {4.1}Evaluadores unidimensionales}{3}{}%
-\contentsline {subsubsection}{\numberline {4.1.1}Código del ejemplo}{4}{}%
-\contentsline {subsection}{\numberline {4.2}Definición y evaluación de un evaluador unidimensional}{6}{}%
-\contentsline {subsection}{\numberline {4.3}Definición de valores de coordenadas uniformes en una dimensión}{8}{}%
