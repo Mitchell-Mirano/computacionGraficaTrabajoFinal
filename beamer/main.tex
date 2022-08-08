@@ -358,7 +358,7 @@ dimensión. Como antes, el $P_{ij}$ puede representar vértices, normales, color
 
 \begin{frame}[fragile]
     \frametitle{Evaluadores bidimensionales}
-    
+
 El procedimiento para usar evaluadores bidimensionales es similar al procedimiento para una dimensión.
 
 \begin{itemize}
@@ -373,17 +373,17 @@ El procedimiento para usar evaluadores bidimensionales es similar al procedimien
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]
     \frametitle{Definición y evaluación de un evaluador bidimensional}
-    
+
     Use GLMAP2*() y GlevalCoord2*() para definir y luego invocar un evaluador bidimensional.
     void glMap2{fd}(GLenum target, TYPEu1, TYPEu2, GLint ustride,
     GLint uorder, TYPEv1, TYPEv2, GLint vstride,
     GLint vorder, TYPE points);
-    
+
     El parámetro objetivo puede tener cualquiera de los valores de la tabla, excepto que la cadena MAP1 es
     reemplazado con MAP2. Como antes, estos valores también se usan con glEnable() para habilitar el
     evaluador correspondiente. Los valores mínimos y máximos para U y V se proporcionan como U1, U2,
     V1 y V2. Los parámetros de ustride y vstride indican el número de precisión única o doble
-    valores (según corresponda) entre la configuración independiente para estos valores, 
+    valores (según corresponda) entre la configuración independiente para estos valores,
     lo que permite a los usuarios seleccionar un
     el subrectangulo de control señalada en  una matriz mucho más grande.
     \begin{alertblock}{}
@@ -405,7 +405,7 @@ El procedimiento para usar evaluadores bidimensionales es similar al procedimien
         \item void glEvalCoord2{fd}(TYPE u, TYPE v)
         \item void glEvalCoord2{fd}v(TYPE *values)
     \end{itemize}
-    
+
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -416,11 +416,11 @@ El procedimiento para usar evaluadores bidimensionales es similar al procedimien
     vértice generado si la generación normal automática se ha habilitado pasando
     $GL\_AUTO\_NORMAL$ a glEnable(). Si está deshabilitado, el mapa normal habilitado habilitado correspondiente es
     utilizado para producir una normal. Si no existe tal mapa, se usa la corriente actual.
-    
-    El siguiente(12-2) ejemplo dibuja una superficie de estructura bézier utilizando evaluadores, en este 
+
+    El siguiente(12-2) ejemplo dibuja una superficie de estructura bézier utilizando evaluadores, en este
     ejemplo, la superficie se dibuja con nueve líneas curvas en cada dirección. Cada curva se dibuja como 30
     segmentos.
-    
+
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -471,7 +471,7 @@ GlevalMesh2()
 \begin{alertblock}{}
     \small
     \begin{verbatim}
-        
+
     for (i = nu1; i <= nu2; i++) { /* mode == GL_LINE */
     glBegin(GL_LINES);
         for (j = nv1; j <= nv2; j++)
@@ -529,6 +529,321 @@ Esta textura en el punto (U, V) genera coordenadas de textura (S, T). Está habi
 Evaluador de vértice, por lo que ambos surtan efecto cuando se dibuja la superficie. Si
 Desea que la textura repita tres veces en cada dirección, cambie cada 1.0 en la matriz texpts[][][] a 3.0.
 Dado que la textura se envuelve en este ejemplo, la superficie se representa con nueve copias del mapa de textura.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Interfaz GLU NURBS}
+\begin{frame}[fragile]
+\frametitle{Interfaz GLU NURBS}
+\small
+\begin{itemize}
+    \justifying
+    \item Aunque los evaluadores son la única primitiva de OpenGL
+    disponible para dibujar curvas y superficies directamente,
+    y aunque se pueden implementar de manera muy eficiente en hardware,
+    las aplicaciones a menudo acceden a ellos a través
+    de bibliotecas de nivel superior.
+    \item   GLU proporciona una interfaz NURBS (Non-Uniform Rational B-Spline)
+    construida sobre los comandos del evaluador OpenGL.
+    \item   Si entiende NURBS, escribir código OpenGL para
+    manipular curvas y superficies NURBS es relativamente
+    fácil, incluso con iluminación y mapeo de texturas.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Ejemplo simple de NURBS}
+\small
+Pasos para dibujar curvas NURBS o superficies NURBS sin recortar.
+\begin{itemize}
+    \item[1.] \textbf{glEnable()} con GL\_AUTO\_NORMAL para generar superficies normales.
+    \item[2.] Utilice \textbf{gluNewNurbsRenderer()} para crear un puntero
+    a un objeto NURBS.
+    \item[3.] \textbf{gluNurbsProperty()} para valores de representación,
+    como el tamaño máximo de líneas o polígonos.
+    \item[4.] Llame a \textbf{gluNurbsCallback()} si desea que se le notifique
+    cuando se encuentre un error.
+    \item[5.] Inicie su curva o superficie llamando a \textbf{gluBeginCurve()}
+    o \textbf{gluBeginSurface()}.
+    \item[6.] Genera y renderiza tu curva o superficie \textbf{gluNurbsCurve()} o \textbf{gluNurbsSurface()}
+    \item[7.] \textbf{gluEndCurve()} o \textbf{gluEndSurface()}
+    para completar la curva o superficie.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Administrar objetos NURBS}
+\small
+
+\begin{alertblock}{Comando}
+    \small
+    \emph{GLUnurbsObj* \textbf{gluNewNurbsRenderer}(void);}
+\end{alertblock}
+
+\begin{itemize}
+    \justifying
+    \item Crea un nuevo objeto NURBS, nobj.
+    Devuelve un puntero al nuevo objeto, o cero, si OpenGL no
+    puede asignar memoria para un nuevo objeto NURBS.
+\end{itemize}
+
+\begin{alertblock}{Comando}
+    \small
+    \emph{void \textbf{gluDeleteNurbsRenderer}(GLUnurbsObj *nobj);}
+\end{alertblock}
+
+\begin{itemize}
+    \justifying
+    \item Destruye el objeto NURBS nobj.
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Control de propiedades de renderización de NURBS}
+\small
+
+Un conjunto de propiedades asociadas con un objeto NURBS afecta la
+forma en que el objeto es renderizado. Estas propiedades incluyen
+cómo se rasteriza la superficie (por ejemplo, relleno o estructura alámbrica)
+y la precisión de la teselación.
+
+\begin{alertblock}{Comando}
+    \small
+    \emph{void \textbf{gluNurbsProperty}(GLUnurbsObj *nobj, GLenum property,\\*GLfloat value);}
+\end{alertblock}
+
+\begin{itemize}
+    \justifying
+    \item Controla los atributos de un objeto NURBS, nobj.
+    El argumento de propiedad especifica la propiedad y puede
+    ser \\ GLU\_DISPLAY\_MODE, GLU\_CULLING,\\GLU\_SAMPLING\_METHOD,
+    GLU\_SAMPLING\_TOLERANCE,\\GLU\_PARAMETRIC\_TOLERANCE,\\GLU\_U\_STEP,
+    GLU\_V\_STEP\\ GLU\_AUTO\_LOAD\_MATRIX.
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{gluNurbsProperty}
+\small
+
+\begin{itemize}
+    \item \emph{GLU\_DISPLAY\_MODE}\\
+        Por defecto: GLU\_FILL \\
+        Valores:\\
+        \begin{itemize}
+            \item GLU\_FILL hace que la superficie se represente como polígonos.
+            \item GLU\_OUTLINE\_POLYGON solo se representan los
+            contornos de los polígonos creados por teselación.
+        \end{itemize}
+    \item \emph{GLU\_CULLING}\\
+        Por defecto: GL\_FALSE \\
+        \begin{itemize}
+            \item Puede acelerar el rendimiento al
+            no realizar la teselación si el objeto NURBS cae completamente
+            fuera del volumen de visualización; establezca esta propiedad
+            en GL\_TRUE para habilitar la selección.
+        \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{gluNurbsProperty}
+\small
+
+\begin{itemize}
+    \item \emph{GLU\_SAMPLING\_METHOD}\\
+        Por defecto: GLU\_PATH\_LENGTH \\
+        Valores:\\
+        \begin{itemize}
+            \item GLU\_PATH\_LENGTH,
+            la superficie se representa de modo que la longitud máxima
+            en píxeles, de los bordes de los polígonos teselados no
+            sea mayor que la especificada por GLU\_SAMPLING\_TOLERANCE.
+            \item Cuando se establece en GLU\_PARAMETRIC\_ERROR, el valor
+            especificado por GLU\_PARAMETRIC\_TOLERANCE es la distancia
+            máxima, en píxeles, entre los polígonos teselados y las
+            superficies a las que se aproximan.
+            \item Cuando se establece
+            en GLU\_DOMAIN\_DISTANCE, la aplicación especifica, en
+            coordenadas paramétricas, cuántos puntos de muestra por
+            unidad de longitud se toman en las dimensiones u y v,
+            utilizando los valores para GLU\_U\_STEP y GLU\_V\_STEP.
+        \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{gluNurbsProperty}
+\small
+
+\begin{itemize}
+    \item \emph{GLU\_AUTO\_LOAD\_MATRIX}\\
+        Por defecto: GL\_TRUE \\
+        Valores:\\
+        \begin{itemize}
+            \item Determina si la matriz de proyección, la
+            matriz de vista de modelo y la ventana gráfica se descargan
+            del servidor OpenGL o si la aplicación
+            debe proporcionar estas matrices con gluLoadSamplingMatrices()
+            (GL\_FALSE).
+        \end{itemize}
+\end{itemize}
+
+\begin{alertblock}{Comando}
+    \small
+    \emph{void \textbf{gluLoadSamplingMatrices}(GLUnurbsObj *nobj,
+    const GLfloat modelMatrix[16], const GLfloat projMatrix[16],
+    const GLint viewport[4]);}
+\end{alertblock}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Manejo de errores NURBS}
+\begin{frame}[fragile]
+\frametitle{Manejo de errores NURBS}
+\small
+Dado que hay 37 errores específicos diferentes de las funciones NURBS,
+es una buena idea registrar una devolución de llamada de error para
+informarle si se topó con uno de ellos.
+
+\begin{alertblock}{Comando}
+    \small
+    \emph{void \textbf{gluNurbsCallback}(GLUnurbsObj *nobj, GLenum which,
+void (*fn)(GLenum errorCode));}
+\end{alertblock}
+
+Cuando una función NURBS detecta una condición de error, se invoca fn con el código de error como único argumento. errorCode es una de las 37 condiciones de error, denominadas GLU\_NURBS\_ERROR1 a GLU\_NURBS\_ERROR37.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Crear una curva o superficie NURBS}
+\begin{frame}[fragile]
+\frametitle{Crear una curva o superficie NURBS}
+\small
+Para renderizar una superficie NURBS, \textbf{gluNurbsSurface()}
+está entre paréntesis por \textbf{gluBeginSurface()} y
+\textbf{gluEndSurface()}.
+
+\begin{alertblock}{Comando}
+    \small
+    \emph{void \textbf{gluBeginSurface}(GLUnurbsObj *nobj);}\\
+    \emph{void \textbf{gluEndSurface}(GLUnurbsObj *nobj);}
+\end{alertblock}
+
+Después de gluBeginSurface(), una o más
+llamadas a gluNurbsSurface() definen los atributos de
+la superficie.
+
+\begin{alertblock}{Comando}
+    \small
+    \emph{void \textbf{gluNurbsSurface}(GLUnurbsObj *nobj, GLint uknot\_count,\\
+    GLfloat *uknot, GLint vknot\_count, GLfloat *vknot,\\
+    GLint u\_stride, GLint v\_stride, GLfloat *ctlarray,\\
+    GLint uorder, GLint vorder, GLenum type);}
+\end{alertblock}
+
+\end{frame}
+/viewer.html
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+\frametitle{Crear una curva o superficie NURBS}
+\small
+Dibujar una curva NURBS es similar a dibujar una superficie, excepto
+que todos los cálculos se realizan con un parámetro, u, en lugar de dos.
+Además, para las curvas, \textbf{gluBeginCurve()} y \textbf{gluEndCurve()} son las
+rutinas de horquillado.
+
+\begin{alertblock}{Comando}
+    \small
+    \emph{void \textbf{gluBeginCurve}(GLUnurbsObj *nobj);}\\
+    \emph{void \textbf{gluEndCurve}(GLUnurbsObj *nobj);}
+\end{alertblock}
+
+Después de gluBeginCurve(), una o más llamadas a
+gluNurbsCurve() definen los atributos de la superficie.
+
+\begin{alertblock}{Comando}
+    \small
+    \emph{void \textbf{gluNurbsCurve}(GLUnurbsObj *nobj, GLint uknot\_count,
+    GLfloat *uknot, GLint u\_stride, GLfloat *ctlarray,
+    GLint uorder, GLenum type);}
+\end{alertblock}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Recortar una superficie NURBS}
+\begin{frame}[fragile]
+\frametitle{Recortar una superficie NURBS}
+\small
+Para crear una superficie NURBS recortada con OpenGL, se comienza como
+si se estuviera creando una superficie sin recortar.
+Después de llamar a \textbf{gluBeginSurface()} y \textbf{gluNurbsSurface()}
+pero antes de llamar a \textbf{gluEndSurface()}, inicie un recorte
+llamando a \textbf{gluBeginTrim()}.
+
+\begin{alertblock}{Comando}
+    \small
+    \emph{void \textbf{gluBeginTrim}(GLUnurbsObj *nobj);}\\
+    \emph{void \textbf{gluEndTrim}(GLUnurbsObj *nobj);}
+\end{alertblock}
+
+Marca el principio y el final de la definición
+de un bucle de recorte. Un bucle de recorte es un conjunto
+de segmentos de curva de recorte orientados (que forman
+una curva cerrada) que define los límites de una superficie NURBS.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+\frametitle{Recortar una superficie NURBS}
+\small
+Puede crear dos tipos de curvas de recorte, una curva lineal por partes con
+\textbf{gluPwlCurve()} o una curva NURBS con \textbf{gluNurbsCurve()}.
+Una curva lineal por partes no se parece a lo que convencionalmente
+se llama una curva, porque es una serie de líneas rectas. Una curva
+NURBS para recortar debe estar dentro del cuadrado unitario del espacio
+paramétrico (u, v).
+
+\begin{alertblock}{Comando}
+    \small
+    \emph{void \textbf{gluPwlCurve}(GLUnurbsObj *nobj, GLint count, GLfloat *array,
+    GLint stride, GLenum type);}
+\end{alertblock}
+
+Describe una curva de recorte lineal por partes para
+el objeto NURBS nobj. Hay puntos de conteo en la curva y
+están dados por matriz. El tipo puede ser\\GLU\_MAP1\_TRIM\_2
+(el más común) o GLU\_MAP1\_TRIM\_3 ((u, v, w) espacio de
+parámetros homogéneo).
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
