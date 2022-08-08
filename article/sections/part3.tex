@@ -1,4 +1,4 @@
-\section*{Interfaz GLU NURBS}
+\section{Interfaz GLU NURBS}
 
 Aunque los evaluadores son la única primitiva de OpenGL
 disponible para dibujar curvas y superficies directamente,
@@ -8,7 +8,7 @@ de bibliotecas de nivel superior.
 GLU proporciona una interfaz NURBS (Non-Uniform Rational B-Spline)
 construida sobre los comandos del evaluador OpenGL.
 
-\subsection*{Ejemplo simple de NURBS}
+\subsection{Ejemplo simple de NURBS}
 
 Si entiende NURBS, escribir código OpenGL para
 manipular curvas y superficies NURBS es relativamente
@@ -34,7 +34,7 @@ Ejemplo 12-5: Superficie NURBS: surface.c
 
 \lstinputlisting[language=C++]{../codes/example12-5.cpp}
 
-\subsection*{Administrar un objeto NURBS}
+\subsection{Administrar un objeto NURBS}
 
 Como se mostró en el Ejemplo 12-5, \textbf{gluNewNurbsRenderer()} devuelve un nuevo objeto NURBS, cuyo tipo es un puntero a una estructura GLUnurbsObj. Debe crear este objeto antes de usar cualquier otra rutina NURBS. Cuando haya terminado con un objeto NURBS, puede usar \textbf{gluDeleteNurbsRenderer()} para liberar la memoria que se usó.
 
@@ -49,7 +49,7 @@ Como se mostró en el Ejemplo 12-5, \textbf{gluNewNurbsRenderer()} devuelve un n
     \end{description}
 \end{description}
 
-\subsection*{Control de propiedades de renderización de NURBS}
+\subsection{Control de propiedades de renderización de NURBS}
 
 Un conjunto de propiedades asociadas con un objeto NURBS afecta la forma en que el objeto es renderizado. Estas propiedades incluyen cómo se rasteriza la superficie (por ejemplo, relleno o estructura alámbrica) y la precisión de la teselación.
 
@@ -118,7 +118,7 @@ Un conjunto de propiedades asociadas con un objeto NURBS afecta la forma en que 
         \end{description}
 \end{description}
 
-\subsection*{Manejo de errores NURBS}
+\subsection{Manejo de errores NURBS}
 
 Dado que hay 37 errores diferentes específicos de las funciones NURBS, es una buena idea registrar una devolución de llamada de error para informarle si se topó con uno de ellos. En el ejemplo 12-5, la función de devolución de llamada se registró con
 \newline
@@ -141,7 +141,7 @@ void nurbsError(GLenum errorCode)
 }
 \end{lstlisting}
 
-\section*{Crear una curva o superficie NURBS}
+\section{Crear una curva o superficie NURBS}
 
 Para renderizar una superficie NURBS, gluNurbsSurface() está entre paréntesis por gluBeginSurface() y gluEndSurface(). Las rutinas de horquillado guardan y restauran el estado del evaluador.
 
@@ -187,7 +187,7 @@ gluEndSurface(nobj);
     \end{description}
 \end{description}
 
-\section*{Recortar una superficie NURBS}
+\section{Recortar una superficie NURBS}
 
 Para crear una superficie NURBS recortada con OpenGL, comience como si estuviera creando una superficie sin recortar. Después de llamar a gluBeginSurface() y gluNurbsSurface() pero antes de llamar a gluEndSurface(), inicie un recorte llamando a gluBeginTrim().
 
