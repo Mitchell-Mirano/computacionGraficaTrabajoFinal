@@ -14,7 +14,7 @@
 \usepackage{threeparttable}
 \usepackage{array}
 \title{Evaluadores y NURBS}
-\author{Integrantes:Balboa Palma, Merly Mirano Mitchell Vasquez Sebastian}
+\author{Balboa Merly, Mirano Mitchell, Vasquez Sebastian}
 
 \logo{\includegraphics[scale=0.071]{figura/unmsm.png}}
 \institute{UNMSM--Computación Cientfica}
@@ -254,44 +254,24 @@ El comando \textbf{glMap1()} define un evaluador unidimensional que utiliza esta
    \end{alertblock}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}{Definición y evaluación de un evaluador unidimensional}
-\justifying
+    \justifying
 Se utilizan los valores de los parámetros listados en la Tabla 1 para activar cada evaluador definido antes de invocarlo.
 
-\begin{table}[ht]
-\caption{Tipos de puntos de control para \textbf{glMap1*()}.}\\
-\resizebox{10cm}{!} {
-\begin{center}
-\begin{tabular}{ |c | c | }
-\hline \textbf{Parámetro } & \textbf{Significado} \\ \hline
-\justifying
-GL\_MAP1\_VERTEX\_3 & coordenadas de los vértices x, y, z.\\ \hline
-
-GL\_MAP1\_VERTEX\_4 & coordenadas de los vértices x, y, z, w. \\ \hline
-
-GL\_MAP1\_INDEX & índice de color. \\ \hline
-
-GL\_MAP1\_COLOR\_4 & R, G, B, A. \\ \hline
-
-GL\_MAP1\_NORMAL & coordenadas normales. \\ \hline
-
-GL\_MAP1\_TEXTURE\_COORD\_1 & s coordenadas de textura. \\ \hline
-
-GL\_MAP1\_TEXTURE\_COORD\_2 & s, t coordenadas de textura. \\ \hline
-
-GL\_MAP1\_TEXTURE\_COORD\_3  & s, t, r coordenadas de textura \\ \hline
-
-GL\_MAP1\_TEXTURE\_COORD\_4  & s, t, r, q coordenadas de textura. \\ \hline
-\end{tabular}
-\end{center}}
-\end{table}
- Pasamos el valor apropiado a \textbf{glEnable()} o \textbf{glDisable()} para activar o desactivar el evaluador.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{figura/Tabla.PNG}
+	%\caption{Curva de Bézier.}
+	%\label{fig:propuesta}
+\end{figure}
+Pasamos el valor apropiado a \textbf{glEnable()} o \textbf{glDisable()} para activar o desactivar el evaluador.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]
- \frametitle{Definición y evaluación de un evaluador unidimensional}
- \justifying
+    \frametitle{Definición y evaluación de un evaluador unidimensional}
+    \justifying
 \begin{itemize}
 \justifying
     \item Se puede evaluar más de un evaluador a la vez. Si el evaluador GL\_MAP1\_VERTEX\_3 y  GL\_MAP1\_COLOR\_4 son definidos y habilitados, entonces \textbf{glEvalCoord1()} generan una posición como un color.

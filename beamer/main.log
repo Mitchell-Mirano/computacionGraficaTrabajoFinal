@@ -1,22 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.7) (preloaded format=pdflatex 2021.7.30)  6 AUG 2022 17:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.7) (preloaded format=pdflatex 2021.7.30)  7 AUG 2022 19:13
 entering extended mode
 **"c:/Users/sony/Desktop/Trabajo de Computacion Grafica/computacionGraficaTrabajoFinal/beamer/main.tex"
 (c:/Users/sony/Desktop/Trabajo de Computacion Grafica/computacionGraficaTrabajoFinal/beamer/main.tex
 LaTeX2e <2021-06-01> patch level 1
-L3 programming layer <2021-07-12>
-
-c:/Users/sony/Desktop/Trabajo de Computacion Grafica/computacionGraficaTrabajoFinal/beamer/main.tex:1: LaTeX Error: \usepackage before \documentclass.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1 \usepackage[utf8]{
-                      inputenc}
-\usepackage may only appear in the document preamble, i.e.,
-between \documentclass and \begin{document}.
-
-(C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamer.cls
+L3 programming layer <2021-07-12> (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamer.cls
 Document Class: beamer 2022/05/17 v3.67 A class for typesetting presentations
 (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasemodes.sty (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
@@ -533,7 +520,11 @@ Package: amsthm 2020/05/29 v2.20.6
 ) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerbasethemes.sty)) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerthemedefault.sty (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerfontthemedefault.sty) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamercolorthemedefault.sty) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerinnerthemedefault.sty
 \beamer@dima=\dimen290
 \beamer@dimb=\dimen291
-) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerouterthemedefault.sty))) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerthemePaloAlto.sty (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerouterthemesidebar.sty
+) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerouterthemedefault.sty))) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks45
+\inpenc@posthook=\toks46
+) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerthemePaloAlto.sty (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerouterthemesidebar.sty
 \beamer@sidebarwidth=\dimen292
 \beamer@headheight=\dimen293
 ) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerinnerthemerounded.sty) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamercolorthemeorchid.sty) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamercolorthemewhale.sty)) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
@@ -556,7 +547,7 @@ LaTeX Info: Redefining \textlatin on input line 730.
 File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of babel
 ) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/babel-spanish\spanish.ldf
 Language: spanish.ldf 2021/05/27 v5.0q Spanish support from the babel system
-\es@quottoks=\toks45
+\es@quottoks=\toks47
 \es@quotdepth=\count332
 Package babel Info: Making " an active character on input line 570.
 Package babel Info: Making . an active character on input line 675.
@@ -585,7 +576,7 @@ Package: ragged2e 2021/02/05 v3.0 ragged2e Package
 ) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
 \lst@mode=\count333
 \lst@gtempboxa=\box75
-\lst@token=\toks46
+\lst@token=\toks48
 \lst@length=\count334
 \lst@currlwidth=\dimen295
 \lst@column=\count335
@@ -612,28 +603,18 @@ Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
 \col@sep=\dimen299
 \ar@mcellbox=\box78
 \extrarowheight=\dimen300
-\NC@list=\toks47
+\NC@list=\toks49
 \extratabsurround=\skip78
 \backup@length=\skip79
 \ar@cellbox=\box79
-)
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 17.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 17.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 17.
-
-(C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2021-07-12 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count341
 \l__pdf_internal_box=\box80
-) (main.aux)
+) (main.aux
+LaTeX Info: Redefining \. on input line 25.
+LaTeX Info: Redefining \% on input line 25.
+)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
@@ -696,12 +677,12 @@ LaTeX Font Info:    ... okay on input line 24.
 \scratchbox=\box81
 \nofMPsegments=\count343
 \nofMParguments=\count344
-\everyMPshowfont=\toks48
+\everyMPshowfont=\toks50
 \MPscratchCnt=\count345
 \MPscratchDim=\dimen302
 \MPnumerator=\count346
 \makeMPintoPDFobject=\count347
-\everyMPtoPDFconversion=\toks49
+\everyMPtoPDFconversion=\toks51
 ) (C:\Users\sony\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -721,6 +702,7 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 24.
 LaTeX Info: Redefining \pageref on input line 24.
 LaTeX Info: Redefining \nameref on input line 24.
+ (main.out) (main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
 
@@ -793,9 +775,8 @@ Dictionary: translator-theorem-dictionary, Language: English
 LaTeX Info: Redefining \. on input line 24.
 LaTeX Info: Redefining \% on input line 24.
 \c@lstlisting=\count349
-
-No file main.nav.
-<figura/unmsm.png, id=12, 515.9275pt x 601.24625pt>
+ (main.nav)
+<figura/unmsm.png, id=40, 515.9275pt x 601.24625pt>
 File: figura/unmsm.png Graphic file (type png)
 <use figura/unmsm.png>
 Package pdftex.def Info: figura/unmsm.png  used on input line 24.
@@ -804,15 +785,17 @@ File: figura/unmsm.png Graphic file (type png)
 <use figura/unmsm.png>
 Package pdftex.def Info: figura/unmsm.png  used on input line 28.
 (pdftex.def)             Requested size: 36.63031pt x 42.68785pt.
-[1{C:/Users/sony/AppData/Local/MiKTeX/pdftex/config/pdftex.map}
+ [1{C:/Users/sony/AppData/Local/MiKTeX/pdftex/config/pdftex.map}
 
- <./figura/unmsm.png>]
-No file main.toc.
+ <./figura/unmsm.png>] (main.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
 File: figura/unmsm.png Graphic file (type png)
 <use figura/unmsm.png>
 Package pdftex.def Info: figura/unmsm.png  used on input line 34.
 (pdftex.def)             Requested size: 36.63031pt x 42.68785pt.
-[2
+ [2
 
 ]
 File: figura/unmsm.png Graphic file (type png)
@@ -873,7 +856,7 @@ Package pdftex.def Info: figura/unmsm.png  used on input line 112.
  [8
 
 ]
-<figura/CURVA.PNG, id=296, 371.88937pt x 391.4625pt>
+<figura/CURVA.PNG, id=395, 371.88937pt x 391.4625pt>
 File: figura/CURVA.PNG Graphic file (type png)
 <use figura/CURVA.PNG>
 Package pdftex.def Info: figura/CURVA.PNG  used on input line 128.
@@ -941,104 +924,24 @@ Package pdftex.def Info: figura/unmsm.png  used on input line 255.
  [15
 
 ]
-
-c:/Users/sony/Desktop/Trabajo de Computacion Grafica/computacionGraficaTrabajoFinal/beamer/main.tex:289: LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.289 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-c:/Users/sony/Desktop/Trabajo de Computacion Grafica/computacionGraficaTrabajoFinal/beamer/main.tex:289: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.289 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-c:/Users/sony/Desktop/Trabajo de Computacion Grafica/computacionGraficaTrabajoFinal/beamer/main.tex:289: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.289 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-c:/Users/sony/Desktop/Trabajo de Computacion Grafica/computacionGraficaTrabajoFinal/beamer/main.tex:289: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.289 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-c:/Users/sony/Desktop/Trabajo de Computacion Grafica/computacionGraficaTrabajoFinal/beamer/main.tex:289: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.289 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-c:/Users/sony/Desktop/Trabajo de Computacion Grafica/computacionGraficaTrabajoFinal/beamer/main.tex:289: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.289 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-c:/Users/sony/Desktop/Trabajo de Computacion Grafica/computacionGraficaTrabajoFinal/beamer/main.tex:289: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.289 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
+<figura/Tabla.PNG, id=732, 546.54187pt x 249.18094pt>
+File: figura/Tabla.PNG Graphic file (type png)
+<use figura/Tabla.PNG>
+Package pdftex.def Info: figura/Tabla.PNG  used on input line 269.
+(pdftex.def)             Requested size: 290.74263pt x 132.55574pt.
 File: figura/unmsm.png Graphic file (type png)
 <use figura/unmsm.png>
-Package pdftex.def Info: figura/unmsm.png  used on input line 289.
+Package pdftex.def Info: figura/unmsm.png  used on input line 269.
 (pdftex.def)             Requested size: 36.63031pt x 42.68785pt.
-[16
+ [16
 
-]
+ <./figura/Tabla.PNG>]
 \openout4 = `main.vrb'.
 
  (main.vrb)
 File: figura/unmsm.png Graphic file (type png)
 <use figura/unmsm.png>
-Package pdftex.def Info: figura/unmsm.png  used on input line 313.
+Package pdftex.def Info: figura/unmsm.png  used on input line 293.
 (pdftex.def)             Requested size: 36.63031pt x 42.68785pt.
  [17
 
@@ -1053,7 +956,7 @@ Overfull \hbox (7.51541pt too wide) in paragraph at lines 7--8
 )
 File: figura/unmsm.png Graphic file (type png)
 <use figura/unmsm.png>
-Package pdftex.def Info: figura/unmsm.png  used on input line 340.
+Package pdftex.def Info: figura/unmsm.png  used on input line 320.
 (pdftex.def)             Requested size: 36.63031pt x 42.68785pt.
  [18
 
@@ -1063,7 +966,7 @@ Package pdftex.def Info: figura/unmsm.png  used on input line 340.
  (main.vrb)
 File: figura/unmsm.png Graphic file (type png)
 <use figura/unmsm.png>
-Package pdftex.def Info: figura/unmsm.png  used on input line 365.
+Package pdftex.def Info: figura/unmsm.png  used on input line 345.
 (pdftex.def)             Requested size: 36.63031pt x 42.68785pt.
  [19
 
@@ -1081,30 +984,21 @@ Package pdftex.def Info: figura/unmsm.png  used on input line 365.
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 )
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  C6CB5C7ECFE0574F2902F43E3AFC88EF;1655.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: C6CB5C7ECFE0574F2902F43E3AFC88EF;1655.
  ) 
 Here is how much of TeX's memory you used:
- 24193 strings out of 478870
- 449937 string characters out of 2849310
- 745157 words of memory out of 3000000
- 41528 multiletter control sequences out of 15000+600000
+ 24374 strings out of 478870
+ 454097 string characters out of 2849310
+ 750971 words of memory out of 3000000
+ 41697 multiletter control sequences out of 15000+600000
  421678 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,21n,124p,521b,662s stack positions out of 5000i,500n,10000p,200000b,80000s
- <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1000.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1000.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1095.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0800.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1095.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1440.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0600.pk><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi10.pfb><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi8.pfb><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on main.pdf (19 pages, 612305 bytes).
+ 128i,21n,124p,541b,862s stack positions out of 5000i,500n,10000p,200000b,80000s
+ <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1000.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1000.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1095.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0800.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1095.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1440.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi480\ecss0500.pk> <C:\Users\sony\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0600.pk><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi10.pfb><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmssi8.pfb><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/sony/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on main.pdf (19 pages, 690857 bytes).
 PDF statistics:
- 1120 PDF objects out of 1200 (max. 8388607)
+ 1304 PDF objects out of 1440 (max. 8388607)
  47 named destinations out of 1000 (max. 500000)
- 665 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 732 words of extra memory for PDF output out of 10000 (max. 10000000)
 
