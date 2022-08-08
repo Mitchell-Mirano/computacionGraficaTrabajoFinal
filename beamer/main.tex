@@ -344,4 +344,206 @@ Define una cuadrícula que va de $u1$ a $u2$ en $n$ pasos, que están espaciados
 Excepto si \textbf{i = 0} o \textbf{i = n}, entonces se llama a \textbf{glEvalCoord1()} con exactamente $u1$ o $u2$ como parámetro.
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Evaluadores bidimensionales}
+
+\begin{frame}[fragile]
+\frametitle{Evaluadores bidimensionales}
+
+En dos dimensiones, todo es similar al caso unidimensional, excepto que todos los comandos deben
+tener en cuenta dos parámetros, U y V,. Los puntos, colores, normales o coordenadas de textura deben ser
+suministrado sobre una superficie en lugar de una curva. Matemáticamente, la definición de un parche de superficie Bézier es
+dada por
+
+\begin{block}
+
+\begin{equation*}
+    S(u,v)=\sum_{i=0}^{n}\sum_{j=0}^{m} B_{i}^{n}(u) B_{j}^{m}(v)P_{ij}
+\end{equation*}
+
+\end{block}
+
+donde $P_{ij}$ son un conjunto de puntos de control $m*n$ y los $B_{i}$ son los mismos polinomios de Bernstein para uno
+dimensión. Como antes, el $P_{ij}$ puede representar vértices, normales, colores o coordenadas de textura.
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+    \frametitle{Evaluadores bidimensionales}
+    
+El procedimiento para usar evaluadores bidimensionales es similar al procedimiento para una dimensión.
+
+\begin{itemize}
+    \item Defina los evaluadores(s) con glMap2*()
+    \item Habilitarlos pasando el valor apropiado a glEnable().
+    \item Invocarlos llamando a glEvalCoord2() entre un par glBegin() y glEnd() o por
+    Especificar y luego aplicar una malla con glMapGrid2() y glEvalMesh2().
+\end{itemize}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Definición y evaluación de un evaluador bidimensional}
+    
+    Use GLMAP2*() y GlevalCoord2*() para definir y luego invocar un evaluador bidimensional.
+    void glMap2{fd}(GLenum target, TYPEu1, TYPEu2, GLint ustride,
+    GLint uorder, TYPEv1, TYPEv2, GLint vstride,
+    GLint vorder, TYPE points);
+    
+    El parámetro objetivo puede tener cualquiera de los valores de la tabla, excepto que la cadena MAP1 es
+    reemplazado con MAP2. Como antes, estos valores también se usan con glEnable() para habilitar el
+    evaluador correspondiente. Los valores mínimos y máximos para U y V se proporcionan como U1, U2,
+    V1 y V2. Los parámetros de ustride y vstride indican el número de precisión única o doble
+    valores (según corresponda) entre la configuración independiente para estos valores, 
+    lo que permite a los usuarios seleccionar un
+    el subrectangulo de control señalada en  una matriz mucho más grande.
+    \begin{alertblock}{}
+        \small
+        \center
+            GLfloat ctlpoints[100][100][3];
+    \end{alertblock}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+    \frametitle{Definición y evaluación de un evaluador bidimensional}
+    y desea usar el subconjunto 4x4 que comienza en cltpoints[20][30], elija Ustride para que sea 100*3 y
+    Vstride para ser 3. El punto de partida, puntos, debe establecerse en $\&ctlpoints[20][30][0]$. Finalmente,
+    los parámetros de pedido, Uorder y Vorder pueden ser diferentes, lo que permite parches cúbicos en uno
+    dirección y cuadrática en el otro, por ejemplo.
+
+    \begin{itemize}
+        \item void glEvalCoord2{fd}(TYPE u, TYPE v)
+        \item void glEvalCoord2{fd}v(TYPE *values)
+    \end{itemize}
+    
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+     Los argumentos U y V son los valores(o un puntero a los valores U y V, en la versión vectorial del comando) para las coordenadas de dominio.
+    Si se habilita cualquiera de los evaluadores de vértices ($ GL\_MAP2\_VERTEX\_3 $ o $ GL\_MAP2\_VERTEX\_4 $),
+    entonces lo normal a la superficie se calcula analíticamente. Esta normal está asociada con el
+    vértice generado si la generación normal automática se ha habilitado pasando
+    $GL\_AUTO\_NORMAL$ a glEnable(). Si está deshabilitado, el mapa normal habilitado habilitado correspondiente es
+    utilizado para producir una normal. Si no existe tal mapa, se usa la corriente actual.
+    
+    El siguiente(12-2) ejemplo dibuja una superficie de estructura bézier utilizando evaluadores, en este 
+    ejemplo, la superficie se dibuja con nueve líneas curvas en cada dirección. Cada curva se dibuja como 30
+    segmentos.
+    
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Definición de valores de coordenadas espaciados uniformemente en dos dimensiones}
+
+\begin{frame}[fragile]
+\frametitle{Definición de valores de coordenadas espaciados uniformemente en dos dimensiones}
+
+En dos dimensiones, los comandos glMapGrid2*() y glEvalMesh2() son similares a los
+Versiones unidimensionales, excepto que se deben incluir información de U y V.
+
+\begin{itemize}
+    \item void glMapGrid2{fd}(GLint nu, TYPEu1, TYPEu2,
+    GLint nv, TYPEv1, TYPEv2);
+    \item void glEvalMesh2(GLenum mode, GLint i1, GLint i2, GLint j1, GLint j2);
+\end{itemize}
+
+Define una cuadrícula de mapa bidimensional que va de U1 a U2 en pasos nu uniformemente espaciados, de V1 a
+V2 en pasos NV (glMapGrid2*()), y luego aplica esta cuadrícula a todos los evaluadores habilitados
+(glEvalMesh2()).
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+    \frametitle{Definición de valores de coordenadas espaciados uniformemente en dos dimensiones}
+
+La única diferencia significativa con las versiones unidimensionales de estos dos. Los comandos en glevalmesh2 () el parámetro de modo puede ser $GL\_FILL$ y $GL\_POINT$
+o $GL\_LINE$ $GL\_FILL$ genera polígonos rellenos utilizando el primitivo de malla cuádruple. Declarado precisamente,
+GlevalMesh2()
+
+\begin{alertblock}{}
+    \small
+    \begin{verbatim}
+    glBegin(GL_POINTS); /* mode == GL_POINT */
+    for (i = nu1; i <= nu2; i++)
+    for (j = nv1; j <= nv2; j++)
+    glEvalCoord2(u1 + i*(u2-u1)/nu, v1+j*(v2-v1)/nv);
+    glEnd();
+    \end{verbatim}
+\end{alertblock}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+    \frametitle{Definición de valores de coordenadas espaciados uniformemente en dos dimensiones}
+
+\begin{alertblock}{}
+    \small
+    \begin{verbatim}
+        
+    for (i = nu1; i <= nu2; i++) { /* mode == GL_LINE */
+    glBegin(GL_LINES);
+        for (j = nv1; j <= nv2; j++)
+        glEvalCoord2(u1 + i*(u2-u1)/nu, v1+j*(v2-v1)/nv);
+    glEnd();
+    }
+
+    for (j = nv1; j <= nv2; j++) {
+    glBegin(GL_LINES);
+        for (i = nu1; i <= nu2; i++)
+        glEvalCoord2(u1 + i*(u2-u1)/nu, v1+j*(v2-v1)/nv);
+    glEnd();
+    }
+    \end{verbatim}
+\end{alertblock}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]
+    \frametitle{Definición de valores de coordenadas espaciados uniformemente en dos dimensiones}
+
+\begin{alertblock}{}
+    \small
+    \begin{verbatim}
+    for (i = nu1; i < nu2; i++) { /* mode == GL_FILL */
+    glBegin(GL_QUAD_STRIP);
+    for (j = nv1; j <= nv2; j++) {
+      glEvalCoord2(u1+i*(u2-u1)/nu,v1+j*(v2-v1)/nv);
+      glEvalCoord2(u1+(i+1)*(u2-u1)/nu,v1+j*(v2-v1)/nv);
+    glEnd();
+        }
+    }
+\end{verbatim}
+\end{alertblock}
+
+El siguiente ejemplo(12-3) muestra las diferencias necesarias para dibujar la misma superficie de Bézier que el ejemplo 12-2, pero
+Usando glMapGrid2() y glEvalMesh2() para subdividir el dominio cuadrado en una cuadrícula uniforme de 8x8.
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Usar evaluadores para texturas}
+\begin{frame}[fragile]
+\frametitle{Usar evaluadores para texturas}
+\small
+En el siguiente ejemplo se  habilita dos evaluadores al mismo tiempo: el primero genera puntos tridimensionales en
+la misma superficie de Bézier del ejemplo anterior, y la segunda genera coordenadas de textura. En este caso, el
+Las coordenadas de textura son las mismas que las coordenadas U y V de la superficie, pero un parche especial de Bézier
+debe crearse para hacer esto.
+El parche plano se define sobre un cuadrado con esquinas en (0, 0), (0, 1), (1, 0) y (1, 1);genera (0, 0) en
+esquina (0, 0), (0, 1) en la esquina (0, 1), y así sucesivamente. Ya que es de orden dos (grado lineal más uno), evaluando
+
+Esta textura en el punto (U, V) genera coordenadas de textura (S, T). Está habilitado al mismo tiempo que el
+Evaluador de vértice, por lo que ambos surtan efecto cuando se dibuja la superficie. Si
+Desea que la textura repita tres veces en cada dirección, cambie cada 1.0 en la matriz texpts[][][] a 3.0.
+Dado que la textura se envuelve en este ejemplo, la superficie se representa con nueve copias del mapa de textura.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \end{document}

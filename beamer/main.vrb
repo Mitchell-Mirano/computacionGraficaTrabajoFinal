@@ -1,19 +1,13 @@
-\frametitle{Definición de valores de coordenadas uniformes en una dimensión}
-
-\begin{itemize}
-\justifying
-    \item Aplica la cuadrícula de mapa definida actualmente a todos los evaluadores habilitados. El modo puede ser \textbf{GL\_POINT o GL\_LINE}, dependiendo de si desea dibujar puntos o una línea conectada a lo largo de la curva.
-
-    \item  Tiene exactamente el mismo efecto que emitir una \textbf{glEvalCoord1()} para cada uno de los pasos, incluyendo $p1$ y $p2$, donde $0\le\ p1,\ p2\le\ n$. Es equivalente a lo siguiente:
-\end{itemize}
-
-\begin{alertblock}{}
+\frametitle{Usar evaluadores para texturas}
 \small
-\begin{verbatim}
-  glBegin(GL_POINTS); /* o glBegin(GL_LINE_STRIP);*/
-      for (i = p1; i <= p2; i++)
-          glEvalCoord1(u1 + i*(u2-u1)/n);
-  glEnd();
-\end{verbatim}
-\end{alertblock}
-Excepto si \textbf{i = 0} o \textbf{i = n}, entonces se llama a \textbf{glEvalCoord1()} con exactamente $u1$ o $u2$ como parámetro.
+En el siguiente ejemplo se  habilita dos evaluadores al mismo tiempo: el primero genera puntos tridimensionales en
+la misma superficie de Bézier del ejemplo anterior, y la segunda genera coordenadas de textura. En este caso, el
+Las coordenadas de textura son las mismas que las coordenadas U y V de la superficie, pero un parche especial de Bézier
+debe crearse para hacer esto.
+El parche plano se define sobre un cuadrado con esquinas en (0, 0), (0, 1), (1, 0) y (1, 1);genera (0, 0) en
+esquina (0, 0), (0, 1) en la esquina (0, 1), y así sucesivamente. Ya que es de orden dos (grado lineal más uno), evaluando
+
+Esta textura en el punto (U, V) genera coordenadas de textura (S, T). Está habilitado al mismo tiempo que el
+Evaluador de vértice, por lo que ambos surtan efecto cuando se dibuja la superficie. Si
+Desea que la textura repita tres veces en cada dirección, cambie cada 1.0 en la matriz texpts[][][] a 3.0.
+Dado que la textura se envuelve en este ejemplo, la superficie se representa con nueve copias del mapa de textura.
